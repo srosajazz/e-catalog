@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sergiorosa.ecatalog.dto.CategoryDTO;
 import com.sergiorosa.ecatalog.entities.Category;
 import com.sergiorosa.ecatalog.repositories.CategoryRepository;
+import com.sergiorosa.ecatalog.services.exceptios.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -31,8 +32,8 @@ public class CategoryService {
 	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
-//		Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		Category entity = obj.get();
+//		404 error
+		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 		return new CategoryDTO(entity);
 	}
 }
