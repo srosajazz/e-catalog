@@ -1,5 +1,7 @@
 package com.sergiorosa.ecatalog.services;
 
+
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +14,7 @@ import com.sergiorosa.ecatalog.dto.CategoryDTO;
 import com.sergiorosa.ecatalog.entities.Category;
 import com.sergiorosa.ecatalog.repositories.CategoryRepository;
 import com.sergiorosa.ecatalog.services.exceptios.EntityNotFoundException;
+
 
 @Service
 public class CategoryService {
@@ -34,6 +37,16 @@ public class CategoryService {
 		Optional<Category> obj = repository.findById(id);
 //		404 error
 		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+		return new CategoryDTO(entity);
+	}
+
+//	INSERT
+	
+	@Transactional
+	public CategoryDTO insert(CategoryDTO dto) {
+		Category entity = new Category();
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
 		return new CategoryDTO(entity);
 	}
 }
