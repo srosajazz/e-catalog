@@ -65,7 +65,7 @@ public class Category implements Serializable  {
 	
 
 	public Instant getUpdateddAt() {
-		return updateddAt;
+		return updatedAt;
 	}
 	
 	@PrePersist
