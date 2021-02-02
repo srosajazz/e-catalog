@@ -4,6 +4,7 @@ import Catalog from './pages/catalog';
 import Home from './pages/Home';
 import Admin from './pages/Admin/index';
 import Navbar from './core/components/Navbar';
+import ProductDetails from './pages/catalog/components/ProductDetail';
 
 const Routes = () => (
   <BrowserRouter>
@@ -12,8 +13,11 @@ const Routes = () => (
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/catalog">
+      <Route path="/products" exact>
         <Catalog />
+      </Route>
+      <Route path="/products/:productId">
+        <ProductDetails />
       </Route>
       <Route path="/admin">
         <Admin />
