@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ProductsResponse } from '../../core/types/Product';
 import { makeRequest } from '../../core/utils/request';
 import ProductCard from './components/ProductCard';
 import './styles.scss';
 
 const Catalog = () => {
-  // when start components, search product list
+  const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
 
-  // when search list product is availble
-
-  // popular a state in the component list the products dynamically
+  console.log(productsResponse);
 
   useEffect(() => {
     const params = {
@@ -17,46 +16,19 @@ const Catalog = () => {
       linesPerPage: 12,
     };
     makeRequest({ url: '/products', params }).then((response) =>
-      console.log(response)
+      setProductsResponse(response.data)
     );
   }, []);
+
   return (
     <div className="catalog-container">
       <h1 className="catalog-title">Products Catalog</h1>
       <div className="catalog-products">
-        <Link to="/products/1">
-          <ProductCard />
-        </Link>
-        <Link to="/products/2">
-          <ProductCard />
-        </Link>
-        <Link to="/products/3">
-          <ProductCard />
-        </Link>
-        <Link to="/products/4">
-          <ProductCard />
-        </Link>
-        <Link to="/products/5">
-          <ProductCard />
-        </Link>
-        <Link to="/products/6">
-          <ProductCard />
-        </Link>
-        <Link to="/products/7">
-          <ProductCard />
-        </Link>
-        <Link to="/products/8">
-          <ProductCard />
-        </Link>
-        <Link to="/products/9">
-          <ProductCard />
-        </Link>
-        <Link to="/products/10">
-          <ProductCard />
-        </Link>
-        <Link to="/products/11">
-          <ProductCard />
-        </Link>
+        {productsResponse?.content.map((product) => (
+          <Link to="/products/1" key={product.id}>
+            <ProductCard />
+          </Link>
+        ))}
       </div>
     </div>
   );
