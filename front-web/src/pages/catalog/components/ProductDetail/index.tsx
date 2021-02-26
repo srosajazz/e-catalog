@@ -26,7 +26,7 @@ const ProductDetails = () => {
               <ProductImage className="product-details-image" />
             </div>
             <h1 className="product-details-name">OptiPlex Desktop Computers</h1>
-            <ProductPrice price="3.899,00" />
+            <ProductPrice price={2.876} />
           </div>
           <div className="col-6 product-details-card">
             <h1 className="product-description-title">Product Description</h1>
