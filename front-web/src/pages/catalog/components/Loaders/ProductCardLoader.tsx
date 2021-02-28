@@ -1,16 +1,17 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
+import { generateList } from '../../../../core/utils/list';
 
 const ProductCardLoader = () => {
-  const loaderItems = [0, 1, 2];
+  const loaderItems = generateList(3);
   return (
     <>
       {loaderItems.map((item) => (
         <ContentLoader
           key={item}
           speed={1}
-          width={400}
-          height={460}
+          width={250}
+          height={335}
           viewBox="0 0 250 335"
           backgroundColor="#ecebeb"
           foregroundColor="#d6d2d2"

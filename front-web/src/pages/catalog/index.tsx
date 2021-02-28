@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { ProductsResponse } from '../../core/types/Product';
 import { makeRequest } from '../../core/utils/request';
 import ProductCard from './components/ProductCard';
+import ProductCardLoader from './components/Loaders/ProductCardLoader';
 import './styles.scss';
-import ProductCardLoader from './components/ProductCardLoader/index';
 
 const Catalog = () => {
   const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
   const [isLoading, setIsLoading] = useState(false);
-  console.log(productsResponse);
+  // console.log(productsResponse);
 
   useEffect(() => {
     const params = {
