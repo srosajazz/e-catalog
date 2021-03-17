@@ -1,22 +1,22 @@
 import './styles.scss';
-
+import { NavLink } from 'react-router-dom';
 const Navbar = () => (
   <nav className="admin-nav-container">
     <ul>
       <li>
-        <a href="link" className="admin-nav-item  active">
+        <NavLink to="/admin/products" className="admin-nav-item">
           My Product
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="link" className="admin-nav-item">
+        <NavLink to="/admin/categories" className="admin-nav-item">
           My Category
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="link" className="admin-nav-item">
+        <NavLink to="/admin/users" className="admin-nav-item">
           My Users
-        </a>
+        </NavLink>
       </li>
     </ul>
   </nav>
