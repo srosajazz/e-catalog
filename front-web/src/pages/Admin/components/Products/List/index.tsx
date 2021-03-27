@@ -8,7 +8,7 @@ const List = () => {
   return (
     <div className="admin-products-list">
       <button className="btn btn-primary btn-lg" onClick={handleCreate}>
-        ADD
+        ADD NEW PRODUCT
       </button>
     </div>
   );
