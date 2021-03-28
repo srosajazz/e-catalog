@@ -1,3 +1,4 @@
+import { makeRequest } from 'core/utils/request';
 import React from 'react';
 import { useState } from 'react';
 import BaseForm from '../../BaseForm';
@@ -7,17 +8,21 @@ type FormState = {
   name: string;
   price: string;
   category: string;
+  description: string;
 };
+
+type FormEvent = React.ChangeEvent<
+  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+>;
 
 const Form = () => {
   const [formData, setFormData] = useState<FormState>({
-    name: 'Berklee',
+    name: '',
     price: '',
     category: '',
+    description: '',
   });
-  const handleOnChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleOnChange = (event: FormEvent) => {
     const name = event.target.name;
     const value = event.target.value;
     setFormData((data) => ({ ...data, [name]: value }));
@@ -25,8 +30,18 @@ const Form = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const payload = {
+      ...formData,
+      imgUrl:
+        'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-family-select-2020?wid=470&amp;hei=556&amp;fmt=jpeg&amp;qlt=95&amp;.v=1604343709000',
+      categories: [{ id: formData.category }],
+    };
 
-    console.log(formData);
+    makeRequest({ url: '/products', method: 'POST', data: payload }).then(
+      () => {
+        setFormData({ name: '', category: '', price: '', description: '' });
+      }
+    );
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -47,10 +62,9 @@ const Form = () => {
               onChange={handleOnChange}
               name="category"
             >
-              <option value="bass">Bass</option>
-              <option value="guitar">Guitar</option>
-              <option value="voice">Voice</option>
-              <option value="woodwind">Woodwind</option>
+              <option value="1">Livros</option>
+              <option value="3">Compuador</option>
+              <option value="2">Electronic</option>
             </select>
             <input
               value={formData.price}
@@ -60,6 +74,16 @@ const Form = () => {
               onChange={handleOnChange}
               placeholder="Price"
             />
+          </div>
+          <div className="col-6">
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleOnChange}
+              className="form-control"
+              cols={30}
+              rows={10}
+            ></textarea>
           </div>
         </div>
       </BaseForm>
