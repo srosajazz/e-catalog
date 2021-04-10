@@ -36,6 +36,9 @@ public class Product implements Serializable{
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant date;
 	
+	@ManyToMany(mappedBy = "categories")
+	private Set<Product> products = new HashSet<>();
+	
 	
 	@ManyToMany
 	@JoinTable(name = "tb_product_category",
@@ -108,6 +111,12 @@ public Product() {
 
 	public Set<Category> getCategories() {
 		return categories;
+	}
+	
+	
+
+	public Set<Product> getProducts() {
+		return products;
 	}
 
 	@Override
