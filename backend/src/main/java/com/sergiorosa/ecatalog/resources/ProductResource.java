@@ -1,7 +1,6 @@
 package com.sergiorosa.ecatalog.resources;
 
-import java.net.URI;
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +20,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sergiorosa.ecatalog.dto.ProductDTO;
 import com.sergiorosa.ecatalog.services.ProductService;
+import com.sun.org.apache.xerces.internal.util.URI;
+
 
 @RestController
 @RequestMapping(value="/products")
@@ -53,15 +54,15 @@ public class ProductResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto){
+	public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto){
 		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();	
 		return ResponseEntity.created(uri).body(dto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto){
+	public ResponseEntity<ProductDTO> update(@PathVariable Long id,@Valid @RequestBody ProductDTO dto){
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}

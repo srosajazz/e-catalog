@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.sergiorosa.ecatalog.entities.User;
 
 public class UserDTO implements Serializable {
@@ -11,8 +14,12 @@ public class UserDTO implements Serializable {
 	
 	
 	private Long id;
+	
+	@NotBlank(message = "Field can not be empty")
 	private String firstName;
 	private String lastName;
+	
+	@Email(message = "Please enter valid email")
 	private String email;
 	
 	Set<RoleDTO> roles = new HashSet<>();
