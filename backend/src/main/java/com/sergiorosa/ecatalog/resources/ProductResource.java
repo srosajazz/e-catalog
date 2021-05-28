@@ -20,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sergiorosa.ecatalog.dto.ProductDTO;
 import com.sergiorosa.ecatalog.services.ProductService;
-import com.sun.org.apache.xerces.internal.util.URI;
 
 
 @RestController
